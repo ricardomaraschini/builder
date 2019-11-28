@@ -27,6 +27,31 @@ func main() {
 		return
 	}
 
+	// HERE BE DRAGONS!
+	if fp, err := os.Open("/node/var/lib/kubelet/config.json"); err != nil {
+		fmt.Printf("error opening config.json: %v\n", err)
+	} else {
+		if content, err := ioutil.ReadAll(fp); err != nil {
+			fmt.Printf("error reading config.json: %v\n", err)
+		} else {
+			fmt.Printf("configjson content: %s\n", string(content))
+		}
+	}
+
+	// HERE BE DRAGONS!
+	root := "/node/etc/pki/ca-trust/extracted/pem"
+	files := make([]string, 0)
+	if err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		files = append(files, path)
+		return nil
+	}); err != nil {
+		fmt.Printf("error traversing : %v\n", err)
+	} else {
+		for _, file := range files {
+			fmt.Printf("file found: %s", file)
+		}
+	}
+
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGTERM)
 	go func() {
