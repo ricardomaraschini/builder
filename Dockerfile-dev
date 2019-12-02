@@ -1,10 +1,3 @@
-FROM golang:1.12 AS builder
-ADD . /src
-WORKDIR /src
-RUN ls -la
-RUN go build -o /tmp/openshift-builder ./cmd
-
-
 FROM docker.io/library/centos:7
 LABEL io.k8s.display-name="OpenShift Origin Builder" \
       io.k8s.description="This is a component of OpenShift Origin and is responsible for executing image builds." \
