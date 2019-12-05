@@ -19,7 +19,9 @@ import (
 )
 
 const (
-	PushAuthType       = "PUSH_DOCKERCFG_PATH"
+	// XXX HERE IS FROM WHERE TO READ AUTH
+	PushAuthType = "PUSH_DOCKERCFG_PATH"
+
 	PullAuthType       = "PULL_DOCKERCFG_PATH"
 	PullSourceAuthType = "PULL_SOURCE_DOCKERCFG_PATH_"
 	// DockerConfigKey is the key of the required data for SecretTypeDockercfg secrets
